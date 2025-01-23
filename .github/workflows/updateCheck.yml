@@ -1,0 +1,36 @@
+name: Check txAdminRecipe Changes
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+
+jobs:
+  check_changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for changes in txAdminRecipe
+        run: |
+          REPO_URL="https://github.com/qbcore-framework/txAdminRecipe.git"
+          git clone $REPO_URL repo
+          cd repo
+          git fetch --tags
+          LAST_COMMIT=$(git rev-parse HEAD)
+          echo "Last commit: $LAST_COMMIT"
+          git checkout main  # Change to the default branch if needed
+          git pull
+          NEW_COMMIT=$(git rev-parse HEAD)
+          echo "New commit: $NEW_COMMIT"
+
+          if [ "$LAST_COMMIT" != "$NEW_COMMIT" ]; then
+            echo "Changes detected."
+            echo "Creating issue..."
+            ISSUE_TITLE="New changes detected in txAdminRecipe"
+            ISSUE_BODY="New changes have been made in the txAdminRecipe repository."
+            
+            curl -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/${{ github.repository }}/issues \
+              -d "{\"title\": \"$ISSUE_TITLE\", \"body\": \"$ISSUE_BODY\"}"
+          else
+            echo "No changes detected."
+          fi
