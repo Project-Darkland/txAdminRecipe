@@ -85,8 +85,6 @@ tasks:
     src: ./tmp/bob74_ipl_extracted/bob74_ipl-2.4.0
     dest: ./resources/[standalone]/bob74_ipl
     overwrite: true
-  - action: remove_directory
-    path: ./tmp/bob74_ipl_extracted
 
   # MINI GAMES
   - action: download_github
