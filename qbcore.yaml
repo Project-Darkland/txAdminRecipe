@@ -81,9 +81,12 @@ tasks:
   - action: unzip
     dest: ./tmp/bob74_ipl_extracted
     src: ./tmp/bob74_ipl.zip
-  - action: move_files
-    src: ./tmp/bob74_ipl_extracted/bob74_ipl-2.4.0/*
+  - action: move_path
+    src: ./tmp/bob74_ipl_extracted/bob74_ipl-2.4.0
     dest: ./resources/[standalone]/bob74_ipl
+    overwrite: true
+  - action: remove_directory
+    path: ./tmp/bob74_ipl_extracted
 
   # MINI GAMES
   - action: download_github
