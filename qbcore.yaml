@@ -49,8 +49,8 @@ tasks:
     src: ./tmp/menuv_v1.4.1.zip
 
   - action: download_file
-    path: ./tmp/bob74_ipl-2.4.0.zip
+    path: ./tmp/bob74_ipl.zip
     url: https://github.com/Bob74/bob74_ipl/archive/refs/tags/2.4.0.zip
   - action: unzip
     dest: ./resources/[standalone]/bob74_ipl
-    src: ./tmp/bob74_ipl-2.4.0.zip
+    src: ./tmp/bob74_ipl.zip
