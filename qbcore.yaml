@@ -41,6 +41,27 @@ tasks:
     dest: ./resources/[standalone]
     src: ./tmp/files/oxmysql.zip
 
+  - action: download_github
+    dest: ./resources/[standalone]/screenshot-basic
+    ref: master
+    src: https://github.com/citizenfx/screenshot-basic
+
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound
+    ref: master
+    src: https://github.com/qbcore-framework/interact-sound
+
+  - action: download_github
+    dest: ./resources/[standalone]/connectqueue
+    ref: master
+    src: https://github.com/qbcore-framework/connectqueue
+
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: master
+    src: https://github.com/qbcore-framework/PolyZone
+
+  # UI COMPONENTS
   - action: download_file
     path: ./tmp/menuv_v1.4.1.zip
     url: https://github.com/ThymonA/menuv/releases/download/v1.4.1/menuv_v1.4.1.zip
@@ -48,9 +69,28 @@ tasks:
     dest: ./resources/[standalone]/menuv
     src: ./tmp/menuv_v1.4.1.zip
 
+  - action: download_github
+    dest: ./resources/[standalone]/progressbar
+    ref: main
+    src: https://github.com/qbcore-framework/progressbar
+
+  # MAP TWEAKS
   - action: download_file
     path: ./tmp/bob74_ipl.zip
     url: https://github.com/Bob74/bob74_ipl/archive/refs/tags/2.4.0.zip
   - action: unzip
-    dest: ./resources/[standalone]/bob74_ipl
+    dest: ./tmp/bob74_ipl_extracted
     src: ./tmp/bob74_ipl.zip
+  - action: move_files
+    src: ./tmp/bob74_ipl_extracted/bob74_ipl-2.4.0/*
+    dest: ./resources/[standalone]/bob74_ipl
+
+  # MINI GAMES
+  - action: download_github
+    dest: ./resources/[standalone]/safecracker
+    ref: main
+    src: https://github.com/qbcore-framework/safecracker
+
+  # Clean up
+  - action: remove_path
+    path: ./tmp
