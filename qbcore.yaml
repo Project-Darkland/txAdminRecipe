@@ -61,6 +61,22 @@ tasks:
     ref: master
     src: https://github.com/qbcore-framework/PolyZone
 
+  # MAP TWEAKS
+  - action: download_file
+    path: ./tmp/bob74_ipl.zip
+    url: https://github.com/Bob74/bob74_ipl/archive/refs/tags/2.4.0.zip
+  - action: unzip
+    dest: ./tmp/bob74_ipl_extracted
+    src: ./tmp/bob74_ipl.zip
+  - action: move_path
+    src: ./tmp/bob74_ipl_extracted/bob74_ipl-2.4.0
+    dest: ./resources/[standalone]/bob74_ipl
+    overwrite: true
+
+  # PAUSE FOR GITHUB THROTTLING
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
   # UI COMPONENTS
   - action: download_file
     path: ./tmp/menuv_v1.4.1.zip
@@ -73,18 +89,6 @@ tasks:
     dest: ./resources/[standalone]/progressbar
     ref: main
     src: https://github.com/qbcore-framework/progressbar
-
-  # MAP TWEAKS
-  - action: download_file
-    path: ./tmp/bob74_ipl.zip
-    url: https://github.com/Bob74/bob74_ipl/archive/refs/tags/2.4.0.zip
-  - action: unzip
-    dest: ./tmp/bob74_ipl_extracted
-    src: ./tmp/bob74_ipl.zip
-  - action: move_path
-    src: ./tmp/bob74_ipl_extracted/bob74_ipl-2.4.0
-    dest: ./resources/[standalone]/bob74_ipl
-    overwrite: true
 
   # MINI GAMES
   - action: download_github
