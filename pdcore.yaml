@@ -6,59 +6,58 @@ qbversion: 2.2.4
 author: Darkland Studios
 description: An advanced FiveM RP framework including jobs, gangs, housing & more!
 
+tasks:
+#  Download Base Files
+- action: download_github
+  src: https://github.com/Project-Darkland/txAdminRecipe
+  ref: main
+  dest: ./tmp/pdcore
 
-  #  Download Base Files
-  - action: download_github
-    src: https://github.com/Project-Darkland/txAdminRecipe
-    ref: main
-    dest: ./tmp/pdcore
+- action: move_path
+  src: ./tmp/pdcore/server.cfg
+  dest: ./server.cfg
 
-  - action: move_path
-    src: ./tmp/pdcore/server.cfg
-    dest: ./server.cfg
+- action: move_path
+  src: ./tmp/pdcore/permissions.cfg
+  dest: ./permissions.cfg
 
-  - action: move_path
-    src: ./tmp/pdcore/permissions.cfg
-    dest: ./permissions.cfg
+- action: move_path
+  src: ./tmp/pdcore/voice.cfg
+  dest: ./voice.cfg
 
-  - action: move_path
-    src: ./tmp/pdcore/voice.cfg
-    dest: ./voice.cfg
+- action: move_path
+  src: ./tmp/pdcore/misc.cfg
+  dest: ./misc.cfg
 
-  - action: move_path
-    src: ./tmp/pdcore/misc.cfg
-    dest: ./misc.cfg
+- action: move_path
+  src: ./tmp/pdcore/myLogo.png
+  dest: ./myLogo.png
 
-  - action: move_path
-    src: ./tmp/pdcore/myLogo.png
-    dest: ./myLogo.png
+# Prepare Database
+- action: connect_database
+- action: query_database
+  file: ./tmp/pdcore/pdcore.sql
 
-  # Prepare Database
-  - action: connect_database
-  - action: query_database
-    file: ./tmp/pdcore/pdcore.sql
+# STANDALONE
+- action: download_github
+  src: https://github.com/citizenfx/cfx-server-data
+  subpath: resources
+  dest: ./resources/[cfx-default]
+  # Clean up CFX Defaults
+- action: remove_path
+  path: ./resources/[cfx-default]/[gamemodes]/[maps]/redm-map-one
 
-  # STANDALONE
-  - action: download_github
-    src: https://github.com/citizenfx/cfx-server-data
-    subpath: resources
-    dest: ./resources/[cfx-default]
+- action: remove_path
+  path: ./resources/[cfx-default]/[gamemodes]/[maps]/fivem-map-skater
 
-    # Clean up CFX Defaults
-  - action: remove_path
-    path: ./resources/[cfx-default]/[gamemodes]/[maps]/redm-map-one
+- action: remove_path
+  path: ./resources/[cfx-default]/[gameplay]/chat
 
-  - action: remove_path
-    path: ./resources/[cfx-default]/[gamemodes]/[maps]/fivem-map-skater
+- action: remove_path
+  path: ./resources/[cfx-default]/[local]
 
-  - action: remove_path
-    path: ./resources/[cfx-default]/[gameplay]/chat
+- action: remove_path
+  path: ./resources/[cfx-default]/[system]/sessionmanager-rdr3
 
-  - action: remove_path
-    path: ./resources/[cfx-default]/[local]
-
-  - action: remove_path
-    path: ./resources/[cfx-default]/[system]/sessionmanager-rdr3
-
-  - action: remove_path
-    path: ./resources/[cfx-default]/[test]
+- action: remove_path
+  path: ./resources/[cfx-default]/[test]
